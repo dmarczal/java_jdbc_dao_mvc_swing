@@ -3,13 +3,16 @@ package main;
 import java.sql.SQLException;
 
 import model.User;
+import view.layout.MainJFrame;
 
 public class Main {
 	
 	public static void main(String[] args) throws SQLException {
-		textMode();
+		//textMode();
+		MainJFrame.createAndShowGUI();
 	}		
 
+	@SuppressWarnings("unused")
 	private static void textMode() throws SQLException{
 		System.out.println("Apagando todos os usu‡rios do Banco de Dados");
 		System.out.println(User.deleteAll() + " usu‡rios deletados");

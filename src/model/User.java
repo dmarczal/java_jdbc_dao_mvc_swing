@@ -47,6 +47,10 @@ public class User {
 		this.login = login;
 	}
 	
+	public String[] toArray(){
+		return new String[] {this.id.toString(), this.name, this.login};
+	}
+	
 	@Override
 	public String toString() {
 		return  " id: "    + id +
