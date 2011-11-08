@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,25 +39,34 @@ public class Form extends JDialog{
 	}	
 
 	private void configure(){
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.pack();
 		this.setLocationRelativeTo(this.getRootPane());
 	}
 	
 	private void createForms(){
-		JPanel jpForm = new JPanel(new GridLayout(6, 1, 0, 5));
+		JPanel jpForm = new JPanel(new GridLayout(2, 1, 0, 5));
 
 		jpForm.setBorder(BorderFactory.createTitledBorder("Dados Pessoais"));
 
-		jpForm.add(new JLabel("Nome: "));
-		jpForm.add(jtfName = new JTextField(40));
+		jpForm.add(fieldset(new JLabel("Nome: "),
+				            jtfName = new JTextField(30)));
 
-		jpForm.add(new JLabel("Login: "));
-		jpForm.add(jtfLogin = new JTextField(40));
+		jpForm.add(fieldset(new JLabel("Login: "),
+							jtfLogin = new JTextField(30)));
 
 		this.add(jpForm, BorderLayout.CENTER);
 	}
 
+	private JPanel fieldset(JComponent...components){
+		JPanel fieldset = new JPanel();
+		for (JComponent component : components) {
+			fieldset.add(component);
+		}
+		return fieldset;
+	}
+	
 	private void createButtons(){
 		JPanel jpButtons = new JPanel();    
 
