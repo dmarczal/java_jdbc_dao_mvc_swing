@@ -105,7 +105,7 @@ public class MenuOver extends JMenuBar {
 	}
 	
 	public void cmdSair(){
-		System.out.println("Sair");
+		System.exit(0);
 	}
 	
 	public void cmdAdd(){
