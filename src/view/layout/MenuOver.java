@@ -1,4 +1,4 @@
-package view;
+package view.layout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import util.Util;
+import view.users.Form;
 
 public class MenuOver extends JMenuBar {
 	
@@ -108,6 +109,7 @@ public class MenuOver extends JMenuBar {
 	}
 	
 	public void cmdAdd(){
+		Form.toggle();
 		System.out.println("Adicionar");
 	}
 	

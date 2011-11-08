@@ -3,7 +3,7 @@ package main;
 import java.sql.SQLException;
 
 import model.User;
-import view.MainJFrame;
+import view.layout.MainJFrame;
 
 public class Main {
 	

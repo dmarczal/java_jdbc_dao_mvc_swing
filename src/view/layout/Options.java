@@ -1,4 +1,4 @@
-package view;
+package view.layout;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import util.Util;
+import view.users.Form;
 
 public class Options extends JPanel{
 
@@ -76,11 +77,11 @@ public class Options extends JPanel{
 	}
 	
 	public void cmdSair(){
-		System.out.println("Sair");
+		System.exit(0);
 	}
 	
 	public void cmdAdd(){
-		System.out.println("Adicionar");
+		Form.toggle();
 	}
 	
 	public void cmdEdit(){
