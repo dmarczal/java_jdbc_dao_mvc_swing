@@ -25,9 +25,12 @@ public class MenuOver extends JMenuBar {
 	private JMenuItem jmiAdd;
 	private JMenuItem jmiEdit;
 
+	private JMenu jmHelp;
+	private JMenuItem jmiAbout;
+	
 	public MenuOver(){
 		configure();
-		addListeners();
+		registerListeners();
 	}
 	
 
@@ -36,17 +39,21 @@ public class MenuOver extends JMenuBar {
 		
 		jmEdit = createMenu("Editar", 'E');
 		
+		jmHelp = createMenu("Ajuda", 'H');
+		
 		jmiExit = createMenuItem(jmFile, "Sair", 'S', "close_view",
 				KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
 		
 		
-		jmiAdd = createMenuItem(jmEdit, "Adicionar User", 'A', "add_obj",
+		jmiAdd = createMenuItem(jmEdit, "Adicionar", 'A', "add_obj",
 				KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, 0));
 		
 		
-		jmiEdit = createMenuItem(jmEdit, "Editar tarefa...", 'E', "configs",
+		jmiEdit = createMenuItem(jmEdit, "Editar", 'E', "edit",
 				KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.ALT_MASK));
 		
+		jmiAbout = createMenuItem(jmHelp, "Sobre", 'S', "about",
+				KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_MASK));
 	}
 	
 	
@@ -62,7 +69,7 @@ public class MenuOver extends JMenuBar {
 		
 		JMenuItem jMenuItem = new JMenuItem(name);
 		jMenuItem.setAccelerator(keyStroke);
-		jMenuItem.setIcon(Util.getIcone(getClass(), icone));
+		jMenuItem.setIcon(Util.getIcon(getClass(), icone));
 		jMenuItem.setMnemonic(mnmonic);
 		jMenu.add(jMenuItem);
 		
@@ -70,7 +77,7 @@ public class MenuOver extends JMenuBar {
 	}
 
 
-	private void addListeners(){
+	private void registerListeners(){
 		jmiExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cmdSair();
@@ -86,6 +93,12 @@ public class MenuOver extends JMenuBar {
 		jmiEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cmdEdit();
+			}
+		});
+		
+		jmiAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 	}
