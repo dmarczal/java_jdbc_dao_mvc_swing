@@ -14,10 +14,10 @@ public class Main {
 
 	@SuppressWarnings("unused")
 	private static void textMode() throws SQLException{
-		System.out.println("Apagando todos os usu‡rios do Banco de Dados");
-		System.out.println(User.deleteAll() + " usu‡rios deletados");
+		System.out.println("Apagando todos os usuÃ¡rios do Banco de Dados");
+		System.out.println(User.deleteAll() + " usuÃ¡rios deletados");
 		
-		System.out.println("Criando Usu‡rios");
+		System.out.println("Criando UsuÃ¡rios");
 		User user = new User("Diego", "marczal");
 		user.save();
 		
@@ -28,7 +28,7 @@ public class Main {
 		user_b.save();
 		
 		System.out.println("====================================");
-		System.out.println("Listar Usu‡rios Criados");
+		System.out.println("Listar UsuÃ¡rios Criados");
 		
 		for (User u : User.all()) {
 			System.out.println(u);

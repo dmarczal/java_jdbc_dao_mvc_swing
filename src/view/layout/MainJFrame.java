@@ -17,18 +17,19 @@ public class MainJFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public MainJFrame() {
-		super("Lista de Usuários");
-		setJMenuBar(new MenuOver());
+		super("Lista de Usu√°rios");
 		
 		JPanel jpBody = new JPanel();
 		jpBody.setLayout(new BorderLayout());
 		
-		jpBody.add(new Options(), BorderLayout.SOUTH);
-		
 		JScrollPane jspList = new JScrollPane();
-		jspList.setViewportView(new JTableList());
+		JTableList jTableList = new JTableList();
+		jspList.setViewportView(jTableList);
 		
+		jpBody.add(new Options(jTableList), BorderLayout.SOUTH);
 		jpBody.add(jspList, BorderLayout.CENTER);
+		
+		setJMenuBar(new MenuOver(jTableList));
 		
 		this.setContentPane(jpBody);
 	}

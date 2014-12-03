@@ -3,7 +3,7 @@ package model;
 import java.sql.SQLException;
 import java.util.List;
 
-import dao.concrete.MysqlUserDao;
+import dao.interfaces.UserDao;
 import daoFactory.DaoFactory;
 
 /**
@@ -68,6 +68,14 @@ public class User {
 	}
 	
 	/**
+	 * Method to save the current user in the database
+	 */
+	public void delete() throws SQLException{
+		userDAO().delete(this);
+	}
+	
+	
+	/**
 	 * Method to find all users from the database
 	 * @return users all users from the database
 	 */
@@ -107,8 +115,8 @@ public class User {
 	 * Method to return the user DAO
 	 * @return dao the user dao 
      */
-	private static MysqlUserDao userDAO(){
-		DaoFactory dao = DaoFactory.getMysql();
+	private static UserDao userDAO(){
+		DaoFactory dao = DaoFactory.getDatabase();
 		return dao.getUserDao();
 	}
 }

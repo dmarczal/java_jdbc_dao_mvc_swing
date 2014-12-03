@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import util.Util;
+import view.listeners.EventListerner;
 import view.users.Form;
 
 public class MenuOver extends JMenuBar {
@@ -25,11 +26,16 @@ public class MenuOver extends JMenuBar {
 	private JMenu jmEdit;
 	private JMenuItem jmiAdd;
 	private JMenuItem jmiEdit;
+	private JMenuItem jmiRemove;
 
 	private JMenu jmHelp;
 	private JMenuItem jmiAbout;
 	
-	public MenuOver(){
+
+	private EventListerner eventListerner; 
+	
+	public MenuOver(EventListerner eventListerner) {
+		this.eventListerner = eventListerner;
 		configure();
 		registerListeners();
 	}
@@ -52,6 +58,10 @@ public class MenuOver extends JMenuBar {
 		
 		jmiEdit = createMenuItem(jmEdit, "Editar", 'E', "edit",
 				KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.ALT_MASK));
+		
+		jmiRemove = createMenuItem(jmEdit, "Remover", 'R', "remove",
+				KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.ALT_MASK));
+		
 		
 		jmiAbout = createMenuItem(jmHelp, "Sobre", 'S', "about",
 				KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_MASK));
@@ -87,33 +97,30 @@ public class MenuOver extends JMenuBar {
 		
 		jmiAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cmdAdd();
+				eventListerner.cmdAdd();
 			}
 		});
 		
 		jmiEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cmdEdit();
+				eventListerner.cmdEdit();
+			}
+		});
+		
+		jmiRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				eventListerner.cmdRemove();
 			}
 		});
 		
 		jmiAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				System.out.println("About");
 			}
 		});
 	}
 	
 	public void cmdSair(){
 		System.exit(0);
-	}
-	
-	public void cmdAdd(){
-		Form.toggle();
-		System.out.println("Adicionar");
-	}
-	
-	public void cmdEdit(){
-		System.out.println("Editar");
 	}
 }

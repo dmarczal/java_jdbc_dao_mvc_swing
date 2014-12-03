@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.User;
-import dao.interfaces.UserDAO;
+import dao.interfaces.UserDao;
 import daoFactory.DaoFactory;
 /**
  * The class UserDao has the responsibility 
@@ -17,7 +17,7 @@ import daoFactory.DaoFactory;
  * @author Diego Marczal
  * @version 2011.06.15
  */
-public class MysqlUserDao implements UserDAO{
+public class MysqlUserDao implements UserDao {
 
 	private static final String
 	INSERT = "INSERT INTO users (name, login) VALUES (?, ?)";
@@ -32,6 +32,9 @@ public class MysqlUserDao implements UserDAO{
 	FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
 
 	private static final String 
+	DELETE = "DELETE FROM users where id = ?";
+	
+	private static final String 
 	DELETE_ALL = "DELETE FROM users";
 	
 	
@@ -42,7 +45,7 @@ public class MysqlUserDao implements UserDAO{
 	 * @throws SQLException
 	 */
 	public User insert(User user) throws SQLException {
-		Connection c = DaoFactory.getMysql().openConnection();
+		Connection c = DaoFactory.getDatabase().openConnection();
 		
 		PreparedStatement pstmt = c.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -71,7 +74,7 @@ public class MysqlUserDao implements UserDAO{
 	public List<User> all() throws SQLException {
 		ArrayList<User> users = new ArrayList<User>();
 		
-		Connection c = DaoFactory.getMysql().openConnection();
+		Connection c = DaoFactory.getDatabase().openConnection();
 		PreparedStatement pstmt = c.prepareStatement(ALL);
 
 		ResultSet rset = pstmt.executeQuery();
@@ -91,9 +94,27 @@ public class MysqlUserDao implements UserDAO{
 	 * @throws SQLException 
 	 */
 	public int deleteAll() throws SQLException {
-		Connection c = DaoFactory.getMysql().openConnection();
+		Connection c = DaoFactory.getDatabase().openConnection();
 		PreparedStatement pstmt = c.prepareStatement(DELETE_ALL);
 
+		int rowsAffected = pstmt.executeUpdate();
+		
+		pstmt.close();
+		c.close();
+		
+		return rowsAffected;
+	}
+	
+	/**
+	 * Method to delete all users in the database
+	 * @return rowsAffected the numbers of rows Affected
+	 * @throws SQLException 
+	 */
+	public int delete(User user) throws SQLException {
+		Connection c = DaoFactory.getDatabase().openConnection();
+		PreparedStatement pstmt = c.prepareStatement(DELETE);
+		pstmt.setLong(1, user.getId());
+		
 		int rowsAffected = pstmt.executeUpdate();
 		
 		pstmt.close();
@@ -109,7 +130,7 @@ public class MysqlUserDao implements UserDAO{
 	 * @throws SQLException 
 	 */
 	public User findByLogin(String login) throws SQLException {
-		Connection c = DaoFactory.getMysql().openConnection();
+		Connection c = DaoFactory.getDatabase().openConnection();
 
 		PreparedStatement pstmt = c.prepareStatement(FIND_BY_LOGIN);
 		pstmt.setString(1, login);
@@ -133,7 +154,7 @@ public class MysqlUserDao implements UserDAO{
 	 * @throws SQLException 
 	 */
 	public User findById(Long id) throws SQLException {
-		Connection c = DaoFactory.getMysql().openConnection();
+		Connection c = DaoFactory.getDatabase().openConnection();
 
 		PreparedStatement pstmt = c.prepareStatement(FIND_BY_ID);
 		pstmt.setLong(1, id);

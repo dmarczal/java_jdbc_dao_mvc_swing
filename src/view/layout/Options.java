@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import util.Util;
-import view.users.Form;
+import view.listeners.EventListerner;
 
 public class Options extends JPanel{
 
@@ -22,15 +22,19 @@ public class Options extends JPanel{
 	
 	private JToolBar jtbOptions;
 	
-	public Options() {
-		// Flowlayout is the default layout of panel
+	private EventListerner eventListerner; 
+	
+	public Options(EventListerner eventListerner) {
+		this.eventListerner = eventListerner;
+		
+		//Flowlayout is the default layout of panel
 		setLayout(new BorderLayout());
 		configure();
 		registerListeners();
 	}
 	
 	private void configure(){
-		jtbOptions = new JToolBar("Barra De Opções"); 
+		jtbOptions = new JToolBar("Barra De Op√ß√µes"); 
 		
 		jbAdd = createButton("Adicionar", "add_obj");
 		jbEdit = createButton("Editar", "edit");
@@ -53,25 +57,25 @@ public class Options extends JPanel{
 	private void registerListeners(){
 		jbEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cmdEdit();
+				eventListerner.cmdEdit();
 			}
 		});
 		
 		jbAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cmdAdd();
+				eventListerner.cmdAdd();
 			}
 		});
 		
 		jbDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cmdDetails();
+				eventListerner.cmdDetails();
 			}
 		});
 		
 		jbRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cmdRemove();
+				eventListerner.cmdRemove();
 			}
 		});
 	}
@@ -79,21 +83,4 @@ public class Options extends JPanel{
 	public void cmdSair(){
 		System.exit(0);
 	}
-	
-	public void cmdAdd(){
-		Form.toggle();
-	}
-	
-	public void cmdEdit(){
-		System.out.println("Editar");
-	}
-	
-	public void cmdDetails(){
-		System.out.println("Details");
-	}
-	
-	public void cmdRemove(){
-		System.out.println("Remove");
-	}
-	
 }

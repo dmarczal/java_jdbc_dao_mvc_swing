@@ -17,8 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
-import controllers.UserController;
-
+import controllers.users.UserController;
 import model.User;
 
 public class Form extends JDialog{
@@ -93,8 +92,8 @@ public class Form extends JDialog{
 	private void cmdSave(){
 		try {
 			User user = new User(jtfName.getText(), jtfLogin.getText());
-			UserController.instance.save(user);
-			JOptionPane.showMessageDialog(this, "Usuário Salvo Com Sucesso", "", JOptionPane.INFORMATION_MESSAGE);
+			UserController.getInstance().save(user);
+			JOptionPane.showMessageDialog(this, "Usu√°rio Salvo Com Sucesso", "", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
